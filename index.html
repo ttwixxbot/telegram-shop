@@ -3,37 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Загрузка...</title> <!-- Название будет изменено из JS -->
-
-    <!-- Подключение стилей -->
+    <title>Загрузка...</title>
     <link rel="stylesheet" href="style.css">
-
-    <!-- Подключение скрипта Telegram Web App -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
 
     <div class="container">
-        <!-- Шапка магазина (заполняется из JS) -->
         <header class="shop-header">
             <div class="shop-logo">
                 <img id="logo-img" src="" alt="Логотип">
             </div>
             <h1 id="shop-title" class="shop-title"></h1>
+            <!-- Элемент для кнопки корзины -->
+            <div id="cart-button" class="cart-button">
+                🛒 <span id="cart-counter">0</span>
+            </div>
         </header>
 
-        <!-- Контейнер для каталога товаров -->
         <main id="product-catalog" class="product-catalog">
             <!-- Карточки товаров будут вставлены сюда с помощью JavaScript -->
         </main>
 
-        <!-- Индикатор загрузки -->
         <div id="loader">Загрузка товаров...</div>
     </div>
 
-    <!-- Подключение файла конфигурации -->
+    <!-- Модальное окно корзины (изначально скрыто) -->
+    <div id="cart-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <button id="close-cart-button" class="close-button">&times;</button>
+            <h2>Ваша корзина</h2>
+            <div id="cart-items-container">
+                <!-- Сюда будут добавляться товары из корзины -->
+            </div>
+            <div class="cart-summary">
+                <strong>Итого: <span id="cart-total-price">0</span> RUB</strong>
+            </div>
+            <div id="order-form">
+                <h3>Оформление заказа</h3>
+                <input type="tel" id="phone-input" placeholder="Ваш номер телефона" required>
+                <input type="text" id="address-input" placeholder="Адрес доставки" required>
+                <button id="submit-order-button" class="submit-order-button">Оформить заказ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подключение скриптов -->
     <script src="config.js"></script>
-    <!-- Подключение основного скрипта логики -->
     <script src="script.js"></script>
 
 </body>
