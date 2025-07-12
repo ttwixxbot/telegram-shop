@@ -94,7 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function changeQuantity(productId, delta) {
         const product = cart.find(p => p.id === productId);
         if (!product) return;
+
         product.quantity += delta;
+
         if (product.quantity <= 0) {
             cart = cart.filter(p => p.id !== productId);
         }
@@ -112,14 +114,17 @@ document.addEventListener('DOMContentLoaded', () => {
         cartItemsContainer.innerHTML = '';
         const orderForm = document.getElementById('order-form');
         const cartSummary = document.querySelector('.cart-summary');
+
         if (cart.length === 0) {
             cartItemsContainer.innerHTML = '<p style="text-align: center; opacity: 0.7;">Ваша корзина пуста.</p>';
             orderForm.style.display = 'none';
             cartSummary.style.display = 'none';
             return;
         }
+        
         orderForm.style.display = 'block';
         cartSummary.style.display = 'block';
+
         cart.forEach(product => {
             const itemEl = document.createElement('div');
             itemEl.className = 'cart-item';
@@ -138,6 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             cartItemsContainer.appendChild(itemEl);
         });
+
         document.querySelectorAll('.quantity-btn').forEach(button => {
             button.addEventListener('click', (e) => {
                 const productId = e.target.dataset.productId;
@@ -158,9 +164,11 @@ document.addEventListener('DOMContentLoaded', () => {
         cartModal.style.display = 'flex';
         renderCartItems();
     });
+
     closeCartButton.addEventListener('click', () => {
         cartModal.style.display = 'none';
     });
+    
     cartModal.addEventListener('click', (e) => {
         if (e.target === cartModal) {
             cartModal.style.display = 'none';
@@ -169,23 +177,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 6. Отправка заказа ---
     submitOrderButton.addEventListener('click', () => {
-        // --- ДОБАВЛЕНО ДЛЯ ОТЛАДКИ ---
-        console.log("Нажата кнопка 'Оформить заказ'");
-
         const phone = phoneInput.value.trim();
         const address = addressInput.value.trim();
 
-        console.log("Телефон:", phone);
-        console.log("Адрес:", address);
-        console.log("Содержимое корзины:", cart);
-
         if (cart.length === 0) {
-            console.error("Ошибка: Корзина пуста.");
             tg.showAlert('Ваша корзина пуста!');
             return;
         }
         if (!phone || !address) {
-            console.error("Ошибка: Не заполнен телефон или адрес.");
             tg.showAlert('Пожалуйста, заполните номер телефона и адрес доставки.');
             return;
         }
@@ -199,21 +198,10 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             orderDate: new Date().toISOString()
         };
-        
-        // --- ДОБАВЛЕНО ДЛЯ ОТЛАДКИ ---
-        console.log("Подготовлены данные для отправки:", orderData);
-        
-        try {
-            console.log("Вызываю tg.sendData()...");
-            tg.sendData(JSON.stringify(orderData));
-            
-            // Важно: tg.close() может сработать раньше, чем данные отправятся.
-            // Для отладки можно временно закомментировать.
-            console.log("Вызываю tg.close()...");
-            tg.close();
-        } catch (e) {
-            console.error("---!!! ОШИБКА ПРИ ВЫЗОВЕ TELEGRAM WEB APP API !!!---", e);
-        }
+
+        tg.sendData(JSON.stringify(orderData));
+        alert('Данные заказа отправлены в Telegram!');
+        tg.close();
     });
 
     // --- Запуск приложения ---
