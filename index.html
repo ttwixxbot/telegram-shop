@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загрузка...</title> <!-- Название будет изменено из JS -->
+
+    <!-- Подключение стилей -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Подключение скрипта Telegram Web App -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Шапка магазина (заполняется из JS) -->
+        <header class="shop-header">
+            <div class="shop-logo">
+                <img id="logo-img" src="" alt="Логотип">
+            </div>
+            <h1 id="shop-title" class="shop-title"></h1>
+        </header>
+
+        <!-- Контейнер для каталога товаров -->
+        <main id="product-catalog" class="product-catalog">
+            <!-- Карточки товаров будут вставлены сюда с помощью JavaScript -->
+        </main>
+
+        <!-- Индикатор загрузки -->
+        <div id="loader">Загрузка товаров...</div>
+    </div>
+
+    <!-- Подключение файла конфигурации -->
+    <script src="config.js"></script>
+    <!-- Подключение основного скрипта логики -->
+    <script src="script.js"></script>
+
+</body>
+</html>
