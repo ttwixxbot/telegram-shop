@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const logoImg = document.getElementById('logo-img');
         logoImg.src = config.logoPath;
         logoImg.onerror = () => { logoImg.style.display = 'none'; };
-        document.documentElement.style.setProperty('--primary-color', config.primaryColor);
+        document.documentElement.style.setProper ty('--primary-color', config.primaryColor);
         tg.setHeaderColor(config.primaryColor);
         if (tg.colorScheme === 'dark') {
             document.body.classList.add('telegram-dark-theme');
@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         tg.sendData(JSON.stringify(orderData));
-        alert('Данные заказа отправлены в Telegram!');
+        tg.showAlert('Данные заказа отправлены в Telegram!'); // Использование tg.showAlert
         tg.close();
     });
 
