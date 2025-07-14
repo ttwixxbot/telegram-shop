@@ -25,7 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const logoImg = document.getElementById('logo-img');
         logoImg.src = config.logoPath;
         logoImg.onerror = () => { logoImg.style.display = 'none'; };
-        document.documentElement.style.setProper ty('--primary-color', config.primaryColor);
+        // ИСПРАВЛЕНИЕ: Удален пробел между 'setProper' и 'ty'
+        document.documentElement.style.setProperty('--primary-color', config.primaryColor);
         tg.setHeaderColor(config.primaryColor);
         if (tg.colorScheme === 'dark') {
             document.body.classList.add('telegram-dark-theme');
